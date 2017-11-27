@@ -34,12 +34,20 @@ def get_total_sales(user):
     total = 0
     user = users.find_one({"name":user})
     user_consultant = users.find_one({"name":auth.username()})
-    print(user_consultant["admin"])
     if user_consultant["admin"]:
         sales_user = sales.find({"user":user["_id"]})
         for subtotal in sales_user:
             total += subtotal["total"]
         return jsonify({"User": user["name"], "total":total})
+    return jsonify({"error":"not allowed"}), 401
+
+@sale.route('/sales/<string:user>/<string:product>', methods=['GET'])
+@auth.login_required
+def get_total_product(user, product):
+    #TODO: Encontrar producto del usuario y mostrar total de su compra por ese producto
+    total = 0
+    user = users.find_one({"name":user})
+    sale = sales.find_one({"name":user["_id"]})
     return jsonify({"error":"not allowed"}), 401
 
 @auth.verify_password
