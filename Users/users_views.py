@@ -29,7 +29,7 @@ def add_users():
     return jsonify({"users":output})
 
 @auth.verify_password
-def verify_password(username, password):
+def verify_admin_password(username, password):
     user = users.find_one({"name":username, "pwd":password, "admin":bool(1)})
     if not user:
         return False
