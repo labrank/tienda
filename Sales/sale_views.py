@@ -15,18 +15,21 @@ sale = Blueprint('sales', __name__)
 @sale.route('/sales', methods=['POST'])
 @auth.login_required
 def add_sales():
-    total = 0
-    user = users.find_one({"name":auth.username()})
-    sale_id = sales.insert_one({"user":user["_id"],"date":datetime.datetime.now(), "total":total}).inserted_id
-    venta_nueva = sales.find_one({"_id": (sale_id)})
+    try:
+        total = 0
+        user = users.find_one({"name":auth.username()})
+        sale_id = sales.insert_one({"user":user["_id"],"date":datetime.datetime.now(), "total":total}).inserted_id
+        venta_nueva = sales.find_one({"_id": (sale_id)})
 
-    for prod in request.json["products"]:
-        product = products.find_one({"name": prod})
-        total += product["price"]
-        sales_products.insert_one({"product":product["_id"], "sale":sale_id})
-    sales.update_one({"_id": sale_id}, {"$set": {"total": total}}, upsert=False)
-    output = {"user": user["name"], "date": venta_nueva["date"], "total": total}
-    return jsonify({"Sale":output})
+        for prod in request.json["products"]:
+            product = products.find_one({"name": prod})
+            total += product["price"]
+            sales_products.insert_one({"product":product["_id"], "sale":sale_id})
+        sales.update_one({"_id": sale_id}, {"$set": {"total": total}}, upsert=False)
+        output = {"user": user["name"], "date": venta_nueva["date"], "total": total}
+        return jsonify({"Sale":output})
+    except ValueError:
+        return jsonify({"Error"})
 
 @sale.route('/sales/<string:user>', methods=['GET'])
 @auth.login_required
@@ -45,10 +48,14 @@ def get_total_sales(user):
 @auth.login_required
 def get_total_product(user, product):
     #TODO: Encontrar producto del usuario y mostrar total de su compra por ese producto
-    total = 0
-    user = users.find_one({"name":user})
-    sale = sales.find_one({"name":user["_id"]})
-    return jsonify({"error":"not allowed"}), 401
+    user_id = users.find_one({"name":user})
+    sale = sales.find_one({"user":user_id["_id"]})
+    user_product = products.find_one({"name":product})
+    sale_products = sales_products.find({"sale":sale["_id"], "product":user_product["_id"]})
+    buyed = sale_products.count()
+    total = user_product["price"] * buyed
+    output = {"User":user, "product": user_product["name"], "buyed":buyed, "total": total }
+    return jsonify({"expended": output})
 
 @auth.verify_password
 def verify_password(username, password):
