@@ -1,10 +1,6 @@
 from flask import jsonify, request, Blueprint
 from flask_httpauth import HTTPBasicAuth
-from pymongo import MongoClient
-
-client = MongoClient('localhost', 27017)
-db = client.store
-users = db.users
+from controller import users
 
 user = Blueprint('user', __name__)
 auth = HTTPBasicAuth()

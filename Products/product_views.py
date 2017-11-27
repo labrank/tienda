@@ -1,10 +1,6 @@
 from flask import jsonify, request, Blueprint
-from pymongo import MongoClient
 from Users.users_views import auth
-
-client = MongoClient('localhost', 27017)
-db = client.store
-products = db.store.products
+from controller import products
 
 product = Blueprint('products', __name__)
 

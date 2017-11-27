@@ -1,14 +1,7 @@
 import datetime
 from flask import jsonify, request, Blueprint
 from Users.users_views import auth
-from pymongo import MongoClient
-
-client = MongoClient('localhost', 27017)
-db = client.store
-products = db.store.products
-users = db.users
-sales = db.sales
-sales_products = db.sales_products
+from controller import users, sales, products, sales_products
 
 sale = Blueprint('sales', __name__)
 
@@ -47,7 +40,6 @@ def get_total_sales(user):
 @sale.route('/sales/<string:user>/<string:product>', methods=['GET'])
 @auth.login_required
 def get_total_product(user, product):
-    #TODO: Encontrar producto del usuario y mostrar total de su compra por ese producto
     user_id = users.find_one({"name":user})
     sale = sales.find_one({"user":user_id["_id"]})
     user_product = products.find_one({"name":product})
