@@ -1,5 +1,6 @@
 from flask import jsonify, request, Blueprint
 from pymongo import MongoClient
+from Users.users_views import verify_password, auth
 
 client = MongoClient('localhost', 27017)
 db = client.store
@@ -24,6 +25,7 @@ def get_product(name):
     return jsonify({"Products":output})
 
 @product.route('/products', methods=['POST'])
+@auth.login_required
 def add_products():
     nombre = request.json["name"]
     precio = request.json["price"]
@@ -33,6 +35,7 @@ def add_products():
     return jsonify({"Product":output})
 
 @product.route('/products', methods=['DELETE'])
+@auth.login_required
 def remove_products():
     nombre = request.json["name"]
     precio = request.json["price"]
@@ -40,6 +43,7 @@ def remove_products():
     return jsonify({"Product":"null"})
 
 @product.route('/product/<string:name>', methods=['PUT'])
+@auth.login_required
 def update_products(name):
     product = products.find_one({"name":name})
     products.update_one({"_id":product["_id"]}, {"$set": request.json}, upsert=False)
