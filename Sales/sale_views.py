@@ -10,7 +10,7 @@ users = db.users
 sales = db.sales
 sales_products = db.sales_products
 
-sale  = Blueprint('sales', __name__)
+sale = Blueprint('sales', __name__)
 
 @sale.route('/sales', methods=['POST'])
 @auth.login_required
@@ -27,6 +27,20 @@ def add_sales():
     sales.update_one({"_id": sale_id}, {"$set": {"total": total}}, upsert=False)
     output = {"user": user["name"], "date": venta_nueva["date"], "total": total}
     return jsonify({"Sale":output})
+
+@sale.route('/sales/<string:user>', methods=['GET'])
+@auth.login_required
+def get_total_sales(user):
+    total = 0
+    user = users.find_one({"name":user})
+    user_consultant = users.find_one({"name":auth.username()})
+    print(user_consultant["admin"])
+    if user_consultant["admin"]:
+        sales_user = sales.find({"user":user["_id"]})
+        for subtotal in sales_user:
+            total += subtotal["total"]
+        return jsonify({"User": user["name"], "total":total})
+    return jsonify({"error":"not allowed"}), 401
 
 @auth.verify_password
 def verify_password(username, password):
