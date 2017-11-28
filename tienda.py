@@ -10,9 +10,11 @@ app.register_blueprint(product)
 app.register_blueprint(user)
 app.register_blueprint(sale)
 
+
 @app.route('/', methods=['GET'])
 def add_sales():
     return jsonify("Hello, store!")
+
 
 if __name__ == '__main__':
     app.run(debug=True)
