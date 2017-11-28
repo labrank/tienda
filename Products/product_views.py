@@ -1,10 +1,6 @@
 from flask import jsonify, request, Blueprint
-from pymongo import MongoClient
 from Users.users_views import auth
-
-client = MongoClient('localhost', 27017)
-db = client.store
-products = db.store.products
+from controller import products
 
 product = Blueprint('products', __name__)
 
@@ -27,12 +23,17 @@ def get_product(name):
 @product.route('/products', methods=['POST'])
 @auth.login_required
 def add_products():
-    nombre = request.json["name"]
-    precio = request.json["price"]
-    product_id = products.insert_one({"name":nombre,"price":precio}).inserted_id
-    producto_nuevo = products.find_one({"_id": (product_id)})
-    output = {"name":producto_nuevo["name"], "price": producto_nuevo["price"]}
-    return jsonify({"Product":output})
+    try:
+        nombre = request.json["name"]
+        precio = request.json["price"]
+        product_id = products.insert_one({"name": nombre, "price": precio}).inserted_id
+        producto_nuevo = products.find_one({"_id": (product_id)})
+        output = {"name": producto_nuevo["name"], "price": producto_nuevo["price"]}
+        return jsonify({"Product": output})
+    except ValueError:
+        return jsonify({"Hay un error en el ingreso de datos"})
+
+
 
 @product.route('/products', methods=['DELETE'])
 @auth.login_required
@@ -45,8 +46,11 @@ def remove_products():
 @product.route('/product/<string:name>', methods=['PUT'])
 @auth.login_required
 def update_products(name):
-    product = products.find_one({"name":name})
-    products.update_one({"_id":product["_id"]}, {"$set": request.json}, upsert=False)
-    producto_nuevo = products.find_one({"name":request.json["name"]})
-    output = {"name":producto_nuevo["name"], "price": producto_nuevo["price"]}
-    return jsonify({"Product":output})
+    try:
+        product = products.find_one({"name":name})
+        products.update_one({"_id":product["_id"]}, {"$set": request.json}, upsert=False)
+        producto_nuevo = products.find_one({"name":request.json["name"]})
+        output = {"name":producto_nuevo["name"], "price": producto_nuevo["price"]}
+        return jsonify({"Product":output})
+    except ValueError:
+        return jsonify({"Hay un error en el ingreso de datos"})

@@ -1,0 +1,563 @@
+{
+	"info": {
+		"name": "Store API - Python - Flask - Mongodb - Love",
+		"_postman_id": "6d80b002-1a2e-e1e0-e7a1-8331340328fa",
+		"description": "# Introduction\nUna API simple que muestra el funcionamiento de flask + Mongodb\n\n# Overview\nPermite manipular productos, usuarios y ventas, tambien genera dos reportes, uno con compras por usuario y otro con compras por producto y usuario\n\n# Authentication\nBasic Auth - Verificada con usuario y contraseña + usuarios administradores\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://127.0.0.1:5000/product/product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/product/product",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"product",
+						"product"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "11877fb3-48fd-4b24-9fbf-97c9db411683",
+					"name": "http://127.0.0.1:5000/product/mesa",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://127.0.0.1:5000/product/mesa",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"product",
+								"mesa"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "66",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 27 Nov 2017 23:12:06 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/0.12.2 Python/3.5.2",
+							"name": "Server",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [],
+					"responseTime": 27,
+					"body": "{\n  \"Products\": {\n    \"nombre\": \"mesa\", \n    \"precio\": 9001\n  }\n}\n"
+				}
+			]
+		},
+		{
+			"name": "http://127.0.0.1:5000/products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/products",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "b9bf4829-6d7d-4a49-8e30-d031ff71d622",
+					"name": "http://127.0.0.1:5000/products",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://127.0.0.1:5000/products",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "785",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 27 Nov 2017 23:12:28 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Werkzeug/0.12.2 Python/3.5.2",
+							"name": "Server",
+							"description": "A name for the server"
+						}
+					],
+					"cookie": [],
+					"responseTime": 33,
+					"body": "{\n  \"Products\": [\n    {\n      \"nombre\": \"sillon\", \n      \"precio\": 1150.0\n    }, \n    {\n      \"nombre\": \"mesa\", \n      \"precio\": 9001\n    }, \n    {\n      \"nombre\": \"cama\", \n      \"precio\": 800.75\n    }, \n    {\n      \"nombre\": \"television a color\", \n      \"precio\": 9000\n    }, \n    {\n      \"nombre\": \"ropero\", \n      \"precio\": 2500.0\n    }, \n    {\n      \"nombre\": \"alacena\", \n      \"precio\": 600\n    }, \n    {\n      \"nombre\": \"alacena\", \n      \"precio\": 600\n    }, \n    {\n      \"nombre\": \"refrigerador\", \n      \"precio\": 4999.99\n    }, \n    {\n      \"nombre\": \"litera\", \n      \"precio\": 5000.0\n    }, \n    {\n      \"nombre\": \"estufa\", \n      \"precio\": 498\n    }, \n    {\n      \"nombre\": \"buro\", \n      \"precio\": 1500\n    }, \n    {\n      \"nombre\": 123, \n      \"precio\": \"casa\"\n    }\n  ]\n}\n"
+				}
+			]
+		},
+		{
+			"name": "http://127.0.0.1:5000/products",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/products",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "103ea2b4-9f05-4bb5-bd5b-8096700ee0f3",
+					"name": "http://127.0.0.1:5000/products",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"cafetera\", \"price\":300}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/products",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"_postman_previewtype": "parsed",
+					"header": [],
+					"cookie": [],
+					"responseTime": 0,
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "http://127.0.0.1:5000/product/product",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/products",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "59b952be-23fc-4990-9d59-156f2083e85c",
+					"name": "http://127.0.0.1:5000/product/mesa",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"mesa\", \"price\":3500}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/products",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"products"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"_postman_previewtype": "parsed",
+					"header": [],
+					"cookie": [],
+					"responseTime": 0,
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "http://127.0.0.1:5000/product",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/product/product",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"product",
+						"product"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "0db195c5-51fc-4fa9-b0f5-018db866524e",
+					"name": "http://127.0.0.1:5000/product",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"mesa\", \"price\":3500}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:5000/product/product",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"product",
+								"product"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"_postman_previewtype": "parsed",
+					"header": [],
+					"cookie": [],
+					"responseTime": 0,
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "http://127.0.0.1:5000/sales",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/sales",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"sales"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/sales/user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/sales/user",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"sales",
+						"user"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "2c4457aa-dbc0-4eeb-b090-27da52b3be5b",
+					"name": "http://127.0.0.1:5000/sales/juan",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://127.0.0.1:5000/sales/user",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"sales",
+								"user"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"_postman_previewtype": "parsed",
+					"header": [],
+					"cookie": [],
+					"responseTime": 0,
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "http://127.0.0.1:5000/sales/user/product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/sales/user/product",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"sales",
+						"user",
+						"product"
+					]
+				}
+			},
+			"response": [
+				{
+					"id": "0f4634c0-795c-4e35-913b-26a1aa985d4b",
+					"name": "http://127.0.0.1:5000/sales/juan/mesa",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://127.0.0.1:5000/sales/user/product",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "5000",
+							"path": [
+								"sales",
+								"user",
+								"product"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"_postman_previewtype": "parsed",
+					"header": [],
+					"cookie": [],
+					"responseTime": 0,
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "http://127.0.0.1:5000/users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/users",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://127.0.0.1:5000/users",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/users",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
